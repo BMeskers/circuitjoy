@@ -7,12 +7,18 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\sprTest</sprite>
+    <sprite>sprites\spr_gate</sprite>
+    <sprite>sprites\spr_locationField</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <objects name="objects">
     <object>objects\Gate</object>
+    <object>objects\gateLocation</object>
   </objects>
+  <rooms name="rooms">
+    <room>rooms\testRoom</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
