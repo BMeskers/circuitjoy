@@ -9,12 +9,20 @@
     <sprite>sprites\sprTest</sprite>
     <sprite>sprites\spr_gate</sprite>
     <sprite>sprites\spr_locationField</sprite>
+    <sprite>sprites\spr_andGate</sprite>
+    <sprite>sprites\spr_xorGate</sprite>
+    <sprite>sprites\spr_notGate</sprite>
+    <sprite>sprites\spr_orGate</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <objects name="objects">
     <object>objects\Gate</object>
     <object>objects\gateLocation</object>
+    <object>objects\obj_andGate</object>
+    <object>objects\obj_orGate</object>
+    <object>objects\obj_xorGate</object>
+    <object>objects\obj_notGate</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>

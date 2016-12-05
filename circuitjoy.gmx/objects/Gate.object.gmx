@@ -29,6 +29,9 @@
 lastY = y;
 pickup = false;
 validPos = true;
+input1 = false;
+input2 = false;
+output = false;
 </string>
           </argument>
         </arguments>
