@@ -10,6 +10,14 @@
     <sprite>sprites\spr_gate</sprite>
     <sprite>sprites\spr_locationField</sprite>
     <sprite>sprites\spr_gridSquare</sprite>
+    <sprite>sprites\spr_andGate</sprite>
+    <sprite>sprites\spr_xorGate</sprite>
+    <sprite>sprites\spr_notGate</sprite>
+    <sprite>sprites\spr_orGate</sprite>
+    <sprite>sprites\spr_inputOff</sprite>
+    <sprite>sprites\spr_outputOff</sprite>
+    <sprite>sprites\spr_inputOn</sprite>
+    <sprite>sprites\spr_outputOn</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -18,6 +26,13 @@
     <object>objects\obj_gateLocation</object>
     <object>objects\obj_wire</object>
     <object>objects\obj_puzzleGrid</object>
+    <object>objects\obj_andGate</object>
+    <object>objects\obj_orGate</object>
+    <object>objects\obj_xorGate</object>
+    <object>objects\obj_notGate</object>
+    <object>objects\obj_component</object>
+    <object>objects\obj_input</object>
+    <object>objects\obj_output</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>
