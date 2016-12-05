@@ -6,15 +6,18 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\sprTest</sprite>
+    <sprite>sprites\spr_test</sprite>
     <sprite>sprites\spr_gate</sprite>
     <sprite>sprites\spr_locationField</sprite>
+    <sprite>sprites\spr_gridSquare</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <objects name="objects">
-    <object>objects\Gate</object>
-    <object>objects\gateLocation</object>
+    <object>objects\obj_gate</object>
+    <object>objects\obj_gateLocation</object>
+    <object>objects\obj_wire</object>
+    <object>objects\obj_puzzleGrid</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>

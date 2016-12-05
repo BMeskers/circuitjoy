@@ -29,6 +29,10 @@
 lastY = y;
 pickup = false;
 validPos = true;
+
+currentGrid = 0;
+currentGridX = 0;
+currentGridY = 0;
 </string>
           </argument>
         </arguments>
@@ -55,21 +59,48 @@ validPos = true;
     x = mouse_x - sprite_width / 2;
     y = mouse_y - sprite_height / 2;
 }else {
-    otherInstance = instance_place(x, y, gateLocation);
-    if (place_meeting(x, y, gateLocation)){
-        centerX = x + sprite_width / 2;
-        centerY = y + sprite_height / 2;
-        if (centerX &gt; otherInstance.x and centerX &lt; otherInstance.x + otherInstance.sprite_width and centerY &gt; otherInstance.y and centerY &lt; otherInstance.y + otherInstance.sprite_height){
+    centerX = x + sprite_width / 2;
+    centerY = y + sprite_height / 2;
     
-            x = round(x / 16) * 16;
-            y = round(y / 16) * 16;
+    otherInstance = 0;
+//    while (nextId != noone){
+    for (i = 0; i &lt; instance_number(obj_gateLocation); i += 1){
+        nextId = instance_find(obj_gateLocation, i);
+        if (centerX &gt; nextId.x and centerX &lt; nextId.x + nextId.width and centerY &gt; nextId.y and centerY &lt; nextId.y + nextId.height){
+            otherInstance = nextId;
+        }else {
+            //i += 1;
+            nextId = instance_find(obj_gateLocation, i);
+        }
+    }
+    locationChange = false;
+    
+    if (otherInstance != 0){
+    
+        gridXLocation = round((x - otherInstance.x) / otherInstance.gridWidth);
+        gridYLocation = round((y - otherInstance.y) / otherInstance.gridHeight);
+        if (otherInstance.grid[gridXLocation, gridYLocation] == 0){
+            if (currentGrid =! 0){
+                currentGrid.grid[currentGridX, currentGridY] = 0;
+            }
+            currentGrid = otherInstance;
+            currentGridX = gridXLocation;
+            currentGridY = gridYLocation;
+            otherInstance.grid[currentGridX, currentGridY] = self;
+            
+            x = currentGridX * otherInstance.gridWidth + otherInstance.x;
+            y = currentGridY * otherInstance.gridHeight + otherInstance.y;
             lastX = x;
             lastY = y;
-        }else {
-            x = lastX;
-            y = lastY;
+            
+            locationChange = true;
+            
+            
         }
-    }else{
+        
+    }
+    
+    if (!locationChange){
         x = lastX;
         y = lastY;
     }
