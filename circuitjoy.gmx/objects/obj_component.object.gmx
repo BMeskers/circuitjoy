@@ -28,6 +28,95 @@
             <string>input1 = false;
 input2 = false;
 output = false;
+
+input1Wire = 0;
+input2Wire = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (input1Wire != 0 and !global.wirePickup){
+    input1 = input1Wire.from.output;
+}
+
+if (input2Wire != 0 and !global.wirePickup){
+    input2 = input2Wire.from.output;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (global.wireDrawing and global.wirePickup = false){
+    newWire = instance_create(x, y, obj_wire)
+    
+    //check on which side this component is pressed
+    //right side
+    if (mouse_x &gt; x + sprite_width / 2){
+        newWire.from = self;
+    //left side
+    }else {
+        //check if top side
+        if (mouse_y &lt; y + sprite_height / 2){
+            if (input1Wire = 0){
+                newWire.to = self;
+                input1Wire = newWire;
+            }else {
+                with(newWire){
+                    instance_destroy();
+                }
+                global.wirePickup = false;
+            }
+            
+        //bottom side
+        }else{
+            if (input2Wire = 0){
+                newWire.to = self;
+                input2Wire = newWire;
+            }else {
+                with(newWire){
+                    instance_destroy();
+                }
+                global.wirePickup = false;
+            }
+        }
+    }
+}
 </string>
           </argument>
         </arguments>

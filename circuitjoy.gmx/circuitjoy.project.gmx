@@ -18,6 +18,8 @@
     <sprite>sprites\spr_outputOff</sprite>
     <sprite>sprites\spr_inputOn</sprite>
     <sprite>sprites\spr_outputOn</sprite>
+    <sprite>sprites\spr_notDrawing</sprite>
+    <sprite>sprites\spr_drawing</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -33,6 +35,8 @@
     <object>objects\obj_component</object>
     <object>objects\obj_input</object>
     <object>objects\obj_output</object>
+    <object>objects\obj_wireButton</object>
+    <object>objects\obj_controller</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>

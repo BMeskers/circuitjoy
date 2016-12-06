@@ -25,13 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>output = !output;
-if (sprite_index == spr_inputOff){
-    sprite_index = spr_inputOn;
+            <string>event_inherited();
+if (global.wireDrawing == false){
+    output = !output;
+    if (sprite_index == spr_inputOff){
+        sprite_index = spr_inputOn;
+    }
+    else{
+        sprite_index = spr_inputOff;
+    }
 }
-else{
-    sprite_index = spr_inputOff;
-}
+
 </string>
           </argument>
         </arguments>
