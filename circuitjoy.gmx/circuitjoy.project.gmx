@@ -20,6 +20,8 @@
     <sprite>sprites\spr_outputOn</sprite>
     <sprite>sprites\spr_notDrawing</sprite>
     <sprite>sprites\spr_drawing</sprite>
+    <sprite>sprites\spr_objective</sprite>
+    <sprite>sprites\spr_objectiveClear</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -37,6 +39,7 @@
     <object>objects\obj_output</object>
     <object>objects\obj_wireButton</object>
     <object>objects\obj_controller</object>
+    <object>objects\obj_objective</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>
