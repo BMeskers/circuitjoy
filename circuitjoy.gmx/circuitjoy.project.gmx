@@ -42,6 +42,7 @@
     <object>objects\obj_wireButton</object>
     <object>objects\obj_controller</object>
     <object>objects\obj_objective</object>
+    <object>objects\obj_GateToolbar</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>

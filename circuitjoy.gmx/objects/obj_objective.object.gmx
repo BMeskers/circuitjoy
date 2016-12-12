@@ -25,9 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>info = "Make the grid using the following:";
+            <string>info = "Make the grid using the following: Boooo booo booo boo !!!!";
 n = irandom_range(1,3);
-n=1;
+//n=1;
 obj1 = "Use " + string(n) + " gates.";
 obj2 = "";
 
@@ -57,21 +57,28 @@ if (n &gt; 1){
           <argument>
             <kind>1</kind>
             <string>draw_self();
-draw_text(x, y, info + "##" + obj1);
+text = info + "##" + obj1
+x2 = x +20;
+y2 = y +20;
 
 infoHeight = string_height(info);
-
+textHeight = string_height(text);
 obj1Width = string_width(obj1);
 obj1Height = string_height(obj1);
 width = obj1Width;
-height = infoHeight + obj1Height;
-draw_sprite(spr_objectiveClear,0,x + width,y + height);
+
+
+draw_text_ext_colour(x2, y2, string(text), obj1Height, sprite_width, c_lime, c_lime, c_green, c_green, 1);
+height = textHeight;
+
+draw_sprite(spr_objectiveClear,0,x2 + width,y2 + height);
 
 if(string_length(obj2) &gt; 0){
     width = string_width(obj2);
-    draw_text(x, y+ height, "#" + obj2);
+    temp = "#" + obj2;
     height = height + string_height(obj2);
-    draw_sprite(spr_objectiveClear,0,x + width,y + height);
+    draw_text_ext_colour(x2, y2 + height, string(obj2), height, sprite_width, c_lime, c_lime, c_green, c_green, 1); 
+    draw_sprite(spr_objectiveClear,0,x2 + width,y2 + height);
 }
 </string>
           </argument>
