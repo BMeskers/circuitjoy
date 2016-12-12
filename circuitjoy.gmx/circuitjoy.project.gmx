@@ -8,7 +8,7 @@
   <sprites name="sprites">
     <sprite>sprites\spr_test</sprite>
     <sprite>sprites\spr_gate</sprite>
-    <sprite>sprites\spr_locationField</sprite>
+    <sprite>sprites\spr_gatesToolbar</sprite>
     <sprite>sprites\spr_gridSquare</sprite>
     <sprite>sprites\spr_andGate</sprite>
     <sprite>sprites\spr_xorGate</sprite>
@@ -23,7 +23,9 @@
     <sprite>sprites\spr_objective</sprite>
     <sprite>sprites\spr_objectiveClear</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\background0</background>
+  </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
     <object>objects\obj_gate</object>

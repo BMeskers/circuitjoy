@@ -28,8 +28,8 @@
             <string>gridSprite = sprite_index;
 gridWidth = sprite_get_width(gridSprite);
 gridHeight = sprite_get_height(gridSprite);
-gridX = 10;
-gridY = 10;
+gridX = 0;
+gridY = 0;
 width = gridWidth * gridX;
 height = gridHeight * gridY;
 
