@@ -24,17 +24,19 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <objects name="objects">
-    <object>objects\obj_gate</object>
+    <objects name="components">
+      <object>objects\obj_component</object>
+      <object>objects\obj_input</object>
+      <object>objects\obj_output</object>
+      <object>objects\obj_gate</object>
+      <object>objects\obj_andGate</object>
+      <object>objects\obj_orGate</object>
+      <object>objects\obj_notGate</object>
+      <object>objects\obj_xorGate</object>
+    </objects>
     <object>objects\obj_gateLocation</object>
-    <object>objects\obj_wire</object>
     <object>objects\obj_puzzleGrid</object>
-    <object>objects\obj_andGate</object>
-    <object>objects\obj_orGate</object>
-    <object>objects\obj_xorGate</object>
-    <object>objects\obj_notGate</object>
-    <object>objects\obj_component</object>
-    <object>objects\obj_input</object>
-    <object>objects\obj_output</object>
+    <object>objects\obj_wire</object>
     <object>objects\obj_wireButton</object>
     <object>objects\obj_controller</object>
   </objects>

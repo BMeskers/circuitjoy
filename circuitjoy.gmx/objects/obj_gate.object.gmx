@@ -153,6 +153,16 @@ if (pickup){
             <string>event_inherited();
 if (global.wireDrawing == false){
     pickup = true;
+    //destroy all attached wires
+    for (i = 0; i &lt; instance_number(obj_wire); i += 1){
+        wire = instance_find(obj_wire, i);
+        if (wire.from == self or wire.to == self){
+            with(wire){
+                instance_destroy();
+            }
+            i -= 1;
+        }
+    }
 }
 
 </string>

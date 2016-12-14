@@ -55,10 +55,14 @@ input2Wire = 0;
             <kind>1</kind>
             <string>if (input1Wire != 0 and !global.wirePickup){
     input1 = input1Wire.from.output;
+}else {
+    input1 = false;
 }
 
 if (input2Wire != 0 and !global.wirePickup){
     input2 = input2Wire.from.output;
+}else {
+    input2 = false;
 }
 </string>
           </argument>
