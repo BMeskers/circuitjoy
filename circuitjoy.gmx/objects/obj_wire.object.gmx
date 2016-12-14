@@ -116,10 +116,15 @@ if (wireplaced){
     if (to != 0){
         fromX = to.x - to.sprite_width - 1;
         fromY = to.y;
-    }
-    if (from != 0){
+        if (to.object_index == obj_input){
+            instance_destroy();
+        }
+    }else {
         fromX = from.x + from.sprite_width;
         fromY = from.y;
+        if (from.object_index == obj_output){
+            instance_destroy();
+        }
     }
     grid = instance_find(obj_puzzleGrid, 0)
     startX = round((fromX - grid.x) / grid.gridWidth);
@@ -139,9 +144,6 @@ if (wireplaced){
             //show_debug_message(is_ptr(gridIndex));
             //show_debug_message(is_ptr(grid.grid[i,j]));
             show_debug_message(grid.grid[i,j]);
-            if (is_ptr(grid.grid[i,j]) == true){
-                show_debug_message("HI &lt;---------------");
-            }
             if (is_real(gridIndex) and gridIndex == 0){
             gridWeight[gID] = 0;
             }else if (is_array(gridIndex)){
@@ -328,13 +330,13 @@ if (!wireplaced){
         for (i = 0; i &lt; ds_list_size(drawPath); i++){
             wID = ds_list_find_value(drawPath, i);
             wX = wID mod grid.gridX;
-            wY = wID div grid.gridY;
+            wY = wID div grid.gridX;
             gridIndex = grid.grid[wX, wY];
             if (!is_array(gridIndex)){
                 gridIndex[global.maxWireInCell] = 0;
             }
             
-            show_debug_message("put: " + string(gridWeight[wID]) + " at: " + string(wID));
+            show_debug_message("put: " + string(gridWeight[wID]) + " at: " + string(wID) + " (" + string(wX) + "," + string(wY) + ")");
             gridIndex[gridWeight[wID]] = self;
             grid.grid[wX, wY] = gridIndex;
         }
