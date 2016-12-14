@@ -8,7 +8,7 @@
   <sprites name="sprites">
     <sprite>sprites\spr_test</sprite>
     <sprite>sprites\spr_gate</sprite>
-    <sprite>sprites\spr_locationField</sprite>
+    <sprite>sprites\spr_gatesToolbar</sprite>
     <sprite>sprites\spr_gridSquare</sprite>
     <sprite>sprites\spr_andGate</sprite>
     <sprite>sprites\spr_xorGate</sprite>
@@ -20,8 +20,12 @@
     <sprite>sprites\spr_outputOn</sprite>
     <sprite>sprites\spr_notDrawing</sprite>
     <sprite>sprites\spr_drawing</sprite>
+    <sprite>sprites\spr_objective</sprite>
+    <sprite>sprites\spr_objectiveClear</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\background0</background>
+  </backgrounds>
   <paths name="paths"/>
   <objects name="objects">
     <objects name="components">
@@ -39,6 +43,8 @@
     <object>objects\obj_wire</object>
     <object>objects\obj_wireButton</object>
     <object>objects\obj_controller</object>
+    <object>objects\obj_objective</object>
+    <object>objects\obj_GateToolbar</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>
