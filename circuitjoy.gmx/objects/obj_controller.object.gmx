@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>global.wirePickup = false;
 global.editColour = $f3f57f;
-global.maxWireInCell = 8;
+global.maxWireInCell = 5;
 </string>
           </argument>
         </arguments>

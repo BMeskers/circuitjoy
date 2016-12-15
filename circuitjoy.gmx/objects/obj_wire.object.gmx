@@ -425,7 +425,7 @@ if (ds_list_size(drawPath) &gt; 1 || (fromID == destID)){
             if (twx mod 2 == 1){
                 tw += twx;
             }
-            tw = twx;
+            //tw = twx;
 //        show_debug_message(string(tID) + " " + string(grid.gridX));
         tx = (tID mod grid.gridX) * grid.sprite_width + grid.x + (tw + 0.5) * xWeightOffset;
         ty = (tID div grid.gridX) * grid.sprite_height + grid.y + (tw + 0.5) * yWeightOffset;
@@ -440,7 +440,7 @@ if (ds_list_size(drawPath) &gt; 1 || (fromID == destID)){
             if (twx mod 2 == 1){
                 tw += twx;
             }
-            tw = twx;
+            //tw = twx;
             tx = (tID mod grid.gridX) * grid.sprite_width + grid.x + (tw + 0.5) * xWeightOffset;
             ty = (tID div grid.gridX) * grid.sprite_height + grid.y + (tw + 0.5) * yWeightOffset;
             
