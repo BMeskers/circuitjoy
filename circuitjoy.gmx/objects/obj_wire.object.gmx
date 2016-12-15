@@ -30,6 +30,7 @@ wireplaced = false;
 from = 0;
 to = 0;
 initPath = false;
+hover = false;
 </string>
           </argument>
         </arguments>
@@ -70,8 +71,8 @@ if (wireplaced){
     for (i = 0; i &lt; ds_list_size(drawPath); i++){
             wID = ds_list_find_value(drawPath, i);
             wX = wID mod grid.gridX;
-            wY = wID div grid.gridY;
-            gridIndex = grid.grid[wX, wX];
+            wY = wID div grid.gridX;
+            gridIndex = grid.grid[wX, wY];
             
             gridIndex[gridWeight[wID]] = 0;
             //remove entire array if it is now empty.
@@ -154,6 +155,7 @@ if (wireplaced){
                         show_debug_message("found: " + string(k) + " at: " + string(gID) + " (" + string(i) + "," + string(j) + ")");
                         break;
                     }
+                    show_debug_message(string(gridWeight[gID]));
                 }
             }else {
                 gridWeight[gID] = noone;
@@ -180,7 +182,7 @@ if (wireplaced){
             nID = xMod + grid.gridX * yMod;
             if (xMod &gt;= 0 and xMod &lt; grid.gridX and yMod &gt;= 0 and yMod &lt; grid.gridY){
                 gridIndex = grid.grid[xMod, yMod];
-                if (gridWeight[nID] != noone and gridChecked[nID] == false){
+                if (gridWeight[nID] != -4 and gridChecked[nID] == false){
                 
                     for (j = 0; j &lt; ds_list_size(path[currentID]); j++){
                         ds_list_add(path[nID], ds_list_find_value(path[currentID], j));
@@ -217,6 +219,7 @@ if (!wireplaced){
     destID = destX + grid.gridX * destY;
     placeComponent = instance_position(mouse_x, mouse_y, obj_component);
     
+    destFound = false;
     if (placeComponent != noone){
             //get components grid position
             compX = (placeComponent.x - grid.x) / grid.gridWidth;
@@ -227,19 +230,23 @@ if (!wireplaced){
             if (mouse_x &gt; placeComponent.x + placeComponent.sprite_width / 2){
                 if (from = 0 and placeComponent != to and compX &lt; grid.gridX - 1){
                     destX = compX + 1;
+                    show_debug_message(string(destX));
+                    destFound = true;
                 }
             //left side
             }else if(compX &gt; 0){
                 if (to = 0 and placeComponent != from){
                     //check if top side
-                    if (mouse_y &lt; placeComponent.y + placeComponent.sprite_height / 2){
+                    if (mouse_y &lt; placeComponent.y + placeComponent.sprite_height / 2 || placeComponent.monoInput){
                         if (placeComponent.input1Wire = 0){
                             destX = compX - 1;
+                            destFound = true;
                         }
                     //bottom side
                     }else{
                         if (placeComponent.input2Wire = 0){
                             destX = compX - 1;
+                            destFound = true;
                         }
                     }
                 }
@@ -247,8 +254,11 @@ if (!wireplaced){
             destID = destX + grid.gridX * destY;
         }
         
+        show_debug_message(string(ds_list_find_value(path[destID], ds_list_size(path[destID]) - 1)));
         if (ds_list_size(path[destID]) &gt; 0){
-            drawPath = path[destID];
+            if (ds_list_size(path[destID]) &gt; 1 || (fromID == destID)){
+                drawPath = path[destID];
+            }
         }
     
 }
@@ -258,7 +268,7 @@ if (!wireplaced){
         </arguments>
       </action>
     </event>
-    <event eventtype="6" enumb="56">
+    <event eventtype="6" enumb="53">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -275,70 +285,79 @@ if (!wireplaced){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (global.wirePickup and !wireplaced){
-    if (placeComponent != noone){
-        
-        //check on which side this component is pressed
-        //right side
-        if (mouse_x &gt; placeComponent.x + placeComponent.sprite_width / 2){
-            if (from = 0 and placeComponent != to and compX &lt; grid.gridX - 1){
-                from = placeComponent;
-                global.wirePickup = false;
-                wireplaced = true;
-                destX = compX + 1;
-                
-                //reverse the drawing path
-                tempPath = ds_list_create();
-                for (i = ds_list_size(drawPath) - 1; i &gt;= 0; i--){
-                    ds_list_add(tempPath, ds_list_find_value(drawPath, i));
-                }
-                drawPath = tempPath;
-            }
-        //left side
-        }else if(compX &gt; 0){
-            if (to = 0 and placeComponent != from){
-                //check if top side
-                if (mouse_y &lt; placeComponent.y + placeComponent.sprite_height / 2){
-                    if (placeComponent.input1Wire = 0){
-                        to = placeComponent;
-                        placeComponent.input1Wire = self;
-                        global.wirePickup = false;
-                        wireplaced = true;
-                        destX = compX - 1;
+            <string>if (initPath){
+    if (global.wirePickup and !wireplaced){
+        if (placeComponent != noone){
+            
+            //check on which side this component is pressed
+            //right side
+            if (mouse_x &gt; placeComponent.x + placeComponent.sprite_width / 2){
+                if (from = 0 and placeComponent != to and compX &lt; grid.gridX - 1){
+                    from = placeComponent;
+                    global.wirePickup = false;
+                    wireplaced = true;
+                    //destX = compX + 1;
+                    
+                    //reverse the drawing path
+                    tempPath = ds_list_create();
+                    for (i = ds_list_size(drawPath) - 1; i &gt;= 0; i--){
+                        ds_list_add(tempPath, ds_list_find_value(drawPath, i));
                     }
-                //bottom side
-                }else{
-                    if (placeComponent.input2Wire = 0){
-                        to = placeComponent;
-                        placeComponent.input2Wire = self;
-                        global.wirePickup = false;
-                        wireplaced = true;
-                        destX = compX - 1;
+                    drawPath = tempPath;
+                }
+            //left side
+            }else if(compX &gt; 0){
+                if (to = 0 and placeComponent != from){
+                    //check if top side
+                    if (mouse_y &lt; placeComponent.y + placeComponent.sprite_height / 2 || placeComponent.monoInput){
+                        if (placeComponent.input1Wire = 0){
+                            to = placeComponent;
+                            placeComponent.input1Wire = self;
+                            global.wirePickup = false;
+                            wireplaced = true;
+                            //destX = compX - 1;
+                        }
+                    //bottom side
+                    }else{
+                        if (placeComponent.input2Wire = 0){
+                            to = placeComponent;
+                            placeComponent.input2Wire = self;
+                            global.wirePickup = false;
+                            wireplaced = true;
+                            //destX = compX - 1;
+                        }
                     }
                 }
             }
-        }
-    //abort placement if not properly placed
-        if (!wireplaced){
+        //abort placement if not properly placed
+            if (!wireplaced){
+                instance_destroy();
+            }
+        }else {
             instance_destroy();
         }
-    }else {
-        instance_destroy();
-    }
-    //apply the correct gridWeights to the grid.
-    if (wireplaced){
-        for (i = 0; i &lt; ds_list_size(drawPath); i++){
-            wID = ds_list_find_value(drawPath, i);
-            wX = wID mod grid.gridX;
-            wY = wID div grid.gridX;
-            gridIndex = grid.grid[wX, wY];
-            if (!is_array(gridIndex)){
-                gridIndex[global.maxWireInCell] = 0;
+        
+        
+        if (wireplaced){
+        //check if the chosen path is actually possible
+        if (ds_list_size(drawPath) &gt; 1 || (fromID == destID)){
+                //apply the correct gridWeights to the grid.
+                for (i = 0; i &lt; ds_list_size(drawPath); i++){
+                    wID = ds_list_find_value(drawPath, i);
+                    wX = wID mod grid.gridX;
+                    wY = wID div grid.gridX;
+                    gridIndex = grid.grid[wX, wY];
+                    if (!is_array(gridIndex)){
+                        gridIndex[global.maxWireInCell - 1] = 0;
+                    }
+                    
+                    show_debug_message("put: " + string(gridWeight[wID]) + " at: " + string(wID) + " (" + string(wX) + "," + string(wY) + ")");
+                    gridIndex[gridWeight[wID]] = self;
+                    grid.grid[wX, wY] = gridIndex;
+                }
+        }else {
+            instance_destroy();
             }
-            
-            show_debug_message("put: " + string(gridWeight[wID]) + " at: " + string(wID) + " (" + string(wX) + "," + string(wY) + ")");
-            gridIndex[gridWeight[wID]] = self;
-            grid.grid[wX, wY] = gridIndex;
         }
     }
 }
@@ -364,8 +383,8 @@ if (!wireplaced){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>wireWidth = 3;
-if (ds_list_size(drawPath) &gt; 0){
+            <string>wireWidth = 4;
+if (ds_list_size(drawPath) &gt; 1 || (fromID == destID)){
     if (global.wirePickup and !wireplaced){
         //color = blue while being placed
         draw_set_colour($f3f57f);
@@ -390,6 +409,9 @@ if (ds_list_size(drawPath) &gt; 0){
             if (self = to.input2Wire){
                 drawY += to.sprite_height / 2;
             }
+            if (to.monoInput){
+                drawY += to.sprite_height / 4;
+            }
             reversed = true;
              
         }
@@ -403,6 +425,7 @@ if (ds_list_size(drawPath) &gt; 0){
             if (twx mod 2 == 1){
                 tw += twx;
             }
+            tw = twx;
 //        show_debug_message(string(tID) + " " + string(grid.gridX));
         tx = (tID mod grid.gridX) * grid.sprite_width + grid.x + (tw + 0.5) * xWeightOffset;
         ty = (tID div grid.gridX) * grid.sprite_height + grid.y + (tw + 0.5) * yWeightOffset;
@@ -417,6 +440,7 @@ if (ds_list_size(drawPath) &gt; 0){
             if (twx mod 2 == 1){
                 tw += twx;
             }
+            tw = twx;
             tx = (tID mod grid.gridX) * grid.sprite_width + grid.x + (tw + 0.5) * xWeightOffset;
             ty = (tID div grid.gridX) * grid.sprite_height + grid.y + (tw + 0.5) * yWeightOffset;
             
@@ -428,6 +452,9 @@ if (ds_list_size(drawPath) &gt; 0){
             drawY = to.y + to.sprite_height / 4;
             if (self = to.input2Wire){
                 drawY += to.sprite_height / 2;
+            }
+            if (to.monoInput){
+                drawY += to.sprite_height / 4;
             }
             draw_line_width(tx, ty, drawX, drawY, wireWidth);
         }else if (placeComponent != noone){
@@ -447,10 +474,14 @@ if (ds_list_size(drawPath) &gt; 0){
             }else if(compX &gt; 0){
                 if (to = 0 and placeComponent != from){
                     //check if top side
-                    if (mouse_y &lt; placeComponent.y + placeComponent.sprite_height / 2){
+                    if (mouse_y &lt; placeComponent.y + placeComponent.sprite_height / 2 || placeComponent.monoInput){
                         if (placeComponent.input1Wire = 0){
                             drawX = placeComponent.x;
                             drawY = placeComponent.y + placeComponent.sprite_height / 4;
+                            if (placeComponent.monoInput){
+                                drawY += placeComponent.sprite_height / 4;
+                            }
+                            
                             draw_line_width(tx, ty, drawX, drawY, wireWidth);
                         }
                     //bottom side

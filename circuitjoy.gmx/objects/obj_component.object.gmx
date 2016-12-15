@@ -28,6 +28,7 @@
             <string>input1 = false;
 input2 = false;
 output = false;
+monoInput = false;
 
 input1Wire = 0;
 input2Wire = 0;
@@ -96,7 +97,7 @@ if (input2Wire != 0 and !global.wirePickup){
     //left side
     }else {
         //check if top side
-        if (mouse_y &lt; y + sprite_height / 2){
+        if (mouse_y &lt; y + sprite_height / 2 || monoInput){
             if (input1Wire = 0){
                 newWire.to = self;
                 input1Wire = newWire;
