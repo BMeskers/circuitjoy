@@ -22,6 +22,7 @@
     <sprite>sprites\spr_drawing</sprite>
     <sprite>sprites\spr_objective</sprite>
     <sprite>sprites\spr_objectiveClear</sprite>
+    <sprite>sprites\spr_glove</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
