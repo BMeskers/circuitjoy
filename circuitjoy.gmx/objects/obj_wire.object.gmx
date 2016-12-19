@@ -31,6 +31,7 @@ from = 0;
 to = 0;
 initPath = false;
 hover = false;
+reverseDraw = false;
 </string>
           </argument>
         </arguments>
@@ -143,12 +144,12 @@ if (wireplaced){
     
     for (j = 0; j &lt; grid.gridY; j++){
         for (i = 0; i &lt; grid.gridX; i++){
-            show_debug_message("(" + string(i) + "," + string(j) + ")"); 
+//            show_debug_message("(" + string(i) + "," + string(j) + ")"); 
             gridIndex = grid.grid[i,j];
             gID = i + (grid.gridX * j);
             //show_debug_message(is_ptr(gridIndex));
             //show_debug_message(is_ptr(grid.grid[i,j]));
-            show_debug_message(grid.grid[i,j]);
+//            show_debug_message(grid.grid[i,j]);
             if (is_real(gridIndex) and gridIndex == 0){
             gridWeight[gID] = 0;
             }else if (is_array(gridIndex)){
@@ -156,60 +157,67 @@ if (wireplaced){
                 for (k = 0; k &lt; array_length_1d(gridIndex); k++){
                     if (gridIndex[k] == 0){
                         gridWeight[gID] = k;
-                        show_debug_message("found: " + string(k) + " at: " + string(gID) + " (" + string(i) + "," + string(j) + ")");
+//                        show_debug_message("found: " + string(k) + " at: " + string(gID) + " (" + string(i) + "," + string(j) + ")");
                         break;
                     }
-                    show_debug_message(string(gridWeight[gID]));
+//                    show_debug_message(string(gridWeight[gID]));
                 }
             }else {
                 gridWeight[gID] = noone;
             }
         }
     }
-    
-    //use a breath first search to find all possible paths.
-    toCheck = ds_queue_create();
     fromID = startX + grid.gridX * startY;
-    ds_list_add(path[fromID], fromID);
-    gridChecked[fromID] = true;
-    ds_queue_enqueue(toCheck, fromID);
-    while (ds_queue_size(toCheck) &gt; 0){
-        //Get the current element
-        currentID = ds_queue_dequeue(toCheck);
-        currentX = currentID mod grid.gridX;
-        currentY  = currentID div grid.gridX;
+    //check if there is space on the initial position
+    if (gridWeight[fromID] != noone){
         
-        //loop over all neighbours
-        for (i = 0; i &lt; 2*pi; i += pi/2){
-            xMod = currentX + cos(i);
-            yMod = currentY + sin(i);
-            nID = xMod + grid.gridX * yMod;
-            if (xMod &gt;= 0 and xMod &lt; grid.gridX and yMod &gt;= 0 and yMod &lt; grid.gridY){
-                gridIndex = grid.grid[xMod, yMod];
-                if (gridWeight[nID] != -4 and gridChecked[nID] == false){
-                
-                    for (j = 0; j &lt; ds_list_size(path[currentID]); j++){
-                        ds_list_add(path[nID], ds_list_find_value(path[currentID], j));
+        
+        //use a breath first search to find all possible paths.
+        toCheck = ds_queue_create();
+        ds_list_add(path[fromID], fromID);
+        gridChecked[fromID] = true;
+        ds_queue_enqueue(toCheck, fromID);
+        while (ds_queue_size(toCheck) &gt; 0){
+            //Get the current element
+            currentID = ds_queue_dequeue(toCheck);
+            currentX = currentID mod grid.gridX;
+            currentY  = currentID div grid.gridX;
+            
+            //loop over all neighbours
+            for (i = 0; i &lt; 2*pi; i += pi/2){
+                xMod = currentX + cos(i);
+                yMod = currentY + sin(i);
+                nID = xMod + grid.gridX * yMod;
+                if (xMod &gt;= 0 and xMod &lt; grid.gridX and yMod &gt;= 0 and yMod &lt; grid.gridY){
+                    gridIndex = grid.grid[xMod, yMod];
+                    if (gridWeight[nID] != noone and gridChecked[nID] == false){
+                    
+                        for (j = 0; j &lt; ds_list_size(path[currentID]); j++){
+                            ds_list_add(path[nID], ds_list_find_value(path[currentID], j));
+                        }
+                        ds_list_add(path[nID], nID);
+                        ds_queue_enqueue(toCheck, nID);
+                        gridChecked[nID] = true;
                     }
-                    ds_list_add(path[nID], nID);
-                    ds_queue_enqueue(toCheck, nID);
-                    gridChecked[nID] = true;
+                    
                 }
                 
             }
-            
         }
+        ds_queue_destroy(toCheck);
+        
+        //set initial path
+        drawPath = ds_list_create();
+        ds_list_add(drawPath, fromID)
+        destX = startX;
+        destY = startY;
+        locID = destX + grid.gridX * destY;
+    }else {
+        instance_destroy();
     }
-    ds_queue_destroy(toCheck);
-    
-    //set initial path
-    drawPath = ds_list_create();
-    ds_list_add(drawPath, fromID)
-    destX = startX;
-    destY = startY;
 }
 
-if (!wireplaced){
+if (!wireplaced and gridWeight[fromID] != noone){
         //get the current path to the destination
         mouseGridX = floor((mouse_x - grid.x) / grid.gridWidth);
         mouseGridY = floor((mouse_y - grid.y) / grid.gridHeight);
@@ -217,22 +225,24 @@ if (!wireplaced){
         if (mouseGridX &gt;= 0 and mouseGridX &lt; grid.gridX and mouseGridY &gt;= 0 and mouseGridY &lt; grid.gridY){
             destX = mouseGridX;
             destY = mouseGridY;
+            locID = destX + grid.gridX * destY;
         }
-    
-    destID = destX + grid.gridX * destY;
+        
     placeComponent = instance_position(mouse_x, mouse_y, obj_component);
     
     destFound = false;
     if (placeComponent != noone){
             //get components grid position
             compX = (placeComponent.x - grid.x) / grid.gridWidth;
-            destY = (placeComponent.y - grid.y) / grid.gridHeight;
+            compY = (placeComponent.y - grid.y) / grid.gridHeight;
+            compdestX = destX;
+            compdestY = compY;
             
             //check side of component
             //right side
             if (mouse_x &gt; placeComponent.x + placeComponent.sprite_width / 2){
                 if (from = 0 and placeComponent != to and compX &lt; grid.gridX - 1){
-                    destX = compX + 1;
+                    compdestX = compX + 1;
                     //show_debug_message(string(destX));
                     destFound = true;
                 }
@@ -242,26 +252,33 @@ if (!wireplaced){
                     //check if top side
                     if (mouse_y &lt; placeComponent.y + placeComponent.sprite_height / 2 || placeComponent.monoInput){
                         if (placeComponent.input1Wire = 0){
-                            destX = compX - 1;
+                            compdestX = compX - 1;
                             destFound = true;
                         }
                     //bottom side
                     }else{
                         if (placeComponent.input2Wire = 0){
-                            destX = compX - 1;
+                            compdestX = compX - 1;
                             destFound = true;
                         }
                     }
                 }
             }
+            destID = locID;
             //check if inside bounds
-            if (destX &gt;= 0 and destX &lt; grid.gridX and destY &gt;= 0 and destY &lt; grid.gridY){
-                destID = destX + grid.gridX * destY;
+           if (compdestX &gt;= 0 and compdestX &lt; grid.gridX and compdestY &gt;= 0 and compdestY &lt; grid.gridY){
+                //check if reachable
+                tempID = compdestX + grid.gridX * compdestY;
+                if (ds_list_find_value(path[tempID],ds_list_size(path[tempID]) - 1)){
+                    destID = tempID;        
+                }
             }
 
+        }else {
+            destID = locID;
         }
-        
         //show_debug_message(string(ds_list_find_value(path[destID], ds_list_size(path[destID]) - 1)));
+        
         if (ds_list_size(path[destID]) &gt; 0){
             if (ds_list_size(path[destID]) &gt; 1 || (fromID == destID)){
                 drawPath = path[destID];
@@ -311,6 +328,7 @@ if (!wireplaced){
                         ds_list_add(tempPath, ds_list_find_value(drawPath, i));
                     }
                     drawPath = tempPath;
+                    reverseDraw = true;
                 }
             //left side
             }else if(compX &gt; 0){
@@ -347,7 +365,12 @@ if (!wireplaced){
         
         if (wireplaced){
         //check if the chosen path is actually possible
-        if (ds_list_size(drawPath) &gt; 1 || (fromID == destID)){
+        if (reversed){
+            checkID = ds_list_find_value(drawPath, 0)
+        }else {
+            checkID = ds_list_find_value(drawPath, ds_list_size(drawPath) -1);
+        }
+        if (checkID == destID){
                 //apply the correct gridWeights to the grid.
                 for (i = 0; i &lt; ds_list_size(drawPath); i++){
                     wID = ds_list_find_value(drawPath, i);
@@ -358,7 +381,7 @@ if (!wireplaced){
                         gridIndex[global.maxWireInCell - 1] = 0;
                     }
                     
-                    show_debug_message("put: " + string(gridWeight[wID]) + " at: " + string(wID) + " (" + string(wX) + "," + string(wY) + ")");
+//                    show_debug_message("put: " + string(gridWeight[wID]) + " at: " + string(wID) + " (" + string(wX) + "," + string(wY) + ")");
                     gridIndex[gridWeight[wID]] = self;
                     grid.grid[wX, wY] = gridIndex;
                 }
@@ -366,6 +389,8 @@ if (!wireplaced){
             instance_destroy();
             }
         }
+    }else if (hover){
+        instance_destroy();
     }
 }
 </string>
@@ -390,9 +415,15 @@ if (!wireplaced){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>wireWidth = 4;
-if (ds_list_size(drawPath) &gt; 1 || (fromID == destID)){
-    if (global.wirePickup and !wireplaced){
+            <string> wireWidth = 4;
+ //check if the path is possible
+if (reverseDraw){
+    checkID = ds_list_find_value(drawPath, 0)
+}else {
+    checkID = ds_list_find_value(drawPath, ds_list_size(drawPath) -1);
+}
+if (checkID == destID){
+    if ((global.wirePickup and !wireplaced) or hover){
         //color = blue while being placed
         draw_set_colour($f3f57f);
         
@@ -405,6 +436,8 @@ if (ds_list_size(drawPath) &gt; 1 || (fromID == destID)){
             draw_set_colour($00AB34);
         }
     }
+    
+    hover = false;
         
         if (from != 0){
             drawX = from.x + from.sprite_width;
@@ -432,12 +465,13 @@ if (ds_list_size(drawPath) &gt; 1 || (fromID == destID)){
             if (twx mod 2 == 1){
                 tw += twx;
             }
-            //tw = twx;
-//        show_debug_message(string(tID) + " " + string(grid.gridX));
         tx = (tID mod grid.gridX) * grid.sprite_width + grid.x + (tw + 0.5) * xWeightOffset;
         ty = (tID div grid.gridX) * grid.sprite_height + grid.y + (tw + 0.5) * yWeightOffset;
         
         draw_line_width(drawX, drawY, tx, ty, wireWidth);
+        if (collision_line(drawX, drawY, tx, ty, obj_cursorCollision, true, true) != noone){
+            hover = true;
+        }
         for (i = 1; i &lt; ds_list_size(drawPath); i++){
             fx = tx
             fy = ty
@@ -447,11 +481,13 @@ if (ds_list_size(drawPath) &gt; 1 || (fromID == destID)){
             if (twx mod 2 == 1){
                 tw += twx;
             }
-            //tw = twx;
             tx = (tID mod grid.gridX) * grid.sprite_width + grid.x + (tw + 0.5) * xWeightOffset;
             ty = (tID div grid.gridX) * grid.sprite_height + grid.y + (tw + 0.5) * yWeightOffset;
             
             draw_line_width(fx, fy, tx, ty, wireWidth);
+            if (collision_line(fx, fy, tx, ty, obj_cursorCollision, true, true) != noone){
+                hover = true;
+            }
         }
         
         if (!(global.wirePickup and !wireplaced)){
@@ -464,18 +500,23 @@ if (ds_list_size(drawPath) &gt; 1 || (fromID == destID)){
                 drawY += to.sprite_height / 4;
             }
             draw_line_width(tx, ty, drawX, drawY, wireWidth);
-        }else if (placeComponent != noone){
+            if (collision_line(tx, ty, drawX, drawY, obj_cursorCollision, true, true) != noone){
+                hover = true;
+            }
+        }else if (placeComponent != noone and tID == destID){
             //get components grid position
             compX = (placeComponent.x - grid.x) / grid.gridWidth;
             destY = (placeComponent.y - grid.y) / grid.gridHeight;
                 //check side of component
                 //right side
                 if (mouse_x &gt; placeComponent.x + placeComponent.sprite_width / 2){
-                    show_debug_message(string(compX));
                     if (from = 0 and placeComponent != to and compX &lt; grid.gridX - 1 and compX &gt;= -1){
-                        drawX = placeComponent.x;
+                        drawX = placeComponent.x + placeComponent.sprite_width;
                         drawY = placeComponent.y + placeComponent.sprite_height / 2;
                         draw_line_width(tx, ty, drawX, drawY, wireWidth);
+                        if (collision_line(tx, ty, drawX, drawY, obj_cursorCollision, true, true) != noone){
+                            hover = true;
+                        }
                     }
                 //left side
                 }else if(compX &gt; 0){
@@ -490,6 +531,9 @@ if (ds_list_size(drawPath) &gt; 1 || (fromID == destID)){
                                 }
                                 
                                 draw_line_width(tx, ty, drawX, drawY, wireWidth);
+                                if (collision_line(tx, ty, drawX, drawY, obj_cursorCollision, true, true) != noone){
+                                    hover = true;
+                                }
                             }
                         //bottom side
                         }else{
@@ -497,12 +541,18 @@ if (ds_list_size(drawPath) &gt; 1 || (fromID == destID)){
                                 drawX = placeComponent.x;
                                 drawY = placeComponent.y + placeComponent.sprite_height / 4 * 3;
                                 draw_line_width(tx, ty, drawX, drawY, wireWidth);
+                                if (collision_line(tx, ty, drawX, drawY, obj_cursorCollision, true, true) != noone){
+                                    hover = true;
+                                }
                             }
                         }
                     }
                 }
             
         }
+}
+if (hover and global.wirePickup){
+    hover = false;
 }
 </string>
           </argument>

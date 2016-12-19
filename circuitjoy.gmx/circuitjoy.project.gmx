@@ -23,6 +23,8 @@
     <sprite>sprites\spr_objective</sprite>
     <sprite>sprites\spr_objectiveClear</sprite>
     <sprite>sprites\spr_glove</sprite>
+    <sprite>sprites\spr_block</sprite>
+    <sprite>sprites\spr_cursorCollision</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -38,6 +40,7 @@
       <object>objects\obj_orGate</object>
       <object>objects\obj_notGate</object>
       <object>objects\obj_xorGate</object>
+      <object>objects\obj_block</object>
     </objects>
     <object>objects\obj_gateLocation</object>
     <object>objects\obj_puzzleGrid</object>
@@ -46,6 +49,7 @@
     <object>objects\obj_controller</object>
     <object>objects\obj_objective</object>
     <object>objects\obj_GateToolbar</object>
+    <object>objects\obj_cursorCollision</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>
