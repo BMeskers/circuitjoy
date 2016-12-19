@@ -25,6 +25,7 @@
     <sprite>sprites\spr_glove</sprite>
     <sprite>sprites\spr_block</sprite>
     <sprite>sprites\spr_cursorCollision</sprite>
+    <sprite>sprites\spr_checkButton</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -50,6 +51,7 @@
     <object>objects\obj_objective</object>
     <object>objects\obj_GateToolbar</object>
     <object>objects\obj_cursorCollision</object>
+    <object>objects\obj_checkButton</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>
