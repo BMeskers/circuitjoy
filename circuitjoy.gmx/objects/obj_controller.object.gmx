@@ -28,13 +28,12 @@
             <string>global.wirePickup = false;
 global.editColour = $f3f57f;
 global.maxWireInCell = 5;
-<<<<<<< HEAD
+
 global.level = 0;
 
 instance_create(0,0,obj_answers);
-=======
-instance_create(0,0,obj_cursorCollision)
->>>>>>> 524b1b8cbd9f0d0acbd27886c3120fe196433802
+
+instance_create(0,0,obj_cursorCollision);
 </string>
           </argument>
         </arguments>
