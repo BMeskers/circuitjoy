@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>finished = false;
+passed = false;
 n = 0;
 </string>
           </argument>
@@ -49,7 +50,17 @@ n = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>n = instance_number(obj_gate);
+            <string>grid = instance_find(obj_puzzleGrid, 0);
+n = 0;
+for (i = 0; i &lt; grid.gridX; i++){
+    for (j = 0; j &lt; grid.gridY; j++){
+        if(!is_array(grid.grid[i,j])){
+            if (object_is_ancestor(grid.grid[i,j].object_index ,obj_gate)){
+                n++;
+            }
+        }
+    }
+}
 </string>
           </argument>
         </arguments>
