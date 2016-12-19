@@ -28,6 +28,42 @@
             <string>finished = false;
 passed = false;
 n = 0;
+inputs = null;
+outputs = null;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>inputID = 0;
+outputID = 0;
+
+for (i = 0; i &lt; array_length_1d(inputs); i ++){
+    inputID += inputs[i].output * power(2, i);
+}
+
+answerID = answ.answers[global.level, inputID];
+
+for (i = 0; i &lt; array_length_1d(outputs); i ++){
+    
+}
 </string>
           </argument>
         </arguments>
@@ -61,6 +97,21 @@ for (i = 0; i &lt; grid.gridX; i++){
         }
     }
 }
+
+inputs = null;
+outputs = null;
+answ = instance_find(obj_answers,0);
+
+for (i = 0; i &lt; instance_number(obj_input); i ++){
+    inputs[i] = instance_find(obj_input, i);
+    inputs[i].output = false;
+}
+for (i = 0; i &lt; instance_number(obj_output); i ++){
+    outputs[i] = instance_find(obj_output, i);
+}
+
+alarm[0] = 20;
+
 </string>
           </argument>
         </arguments>
@@ -86,6 +137,8 @@ for (i = 0; i &lt; grid.gridX; i++){
             <string>draw_self();
 text = string(n) + "gates";
 draw_text(x, y, string(text));
+text2 = string(inputs);
+draw_text(x, y + 20, string(text2));
 </string>
           </argument>
         </arguments>

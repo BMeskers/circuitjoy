@@ -25,12 +25,20 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>global.wirePickup = false;
-global.editColour = $f3f57f;
-global.maxWireInCell = 5;
-global.level = 0;
+            <string>answers = null;
 
-instance_create(0,0,obj_answers);
+answers[0,0] = 1;
+answers[0,1] = 0;
+
+answers[1,0] = 0;
+answers[1,1] = 0;
+answers[1,2] = 0;
+answers[1,3] = 1;
+
+answers[2,0] = 0;
+answers[2,1] = 1;
+answers[2,2] = 1;
+answers[2,3] = 5;
 </string>
           </argument>
         </arguments>
