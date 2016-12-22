@@ -10,6 +10,7 @@
     <sprite>sprites\spr_gate</sprite>
     <sprite>sprites\spr_gatesToolbar</sprite>
     <sprite>sprites\spr_gridSquare</sprite>
+    <sprite>sprites\spr_emptyGrid</sprite>
     <sprite>sprites\spr_andGate</sprite>
     <sprite>sprites\spr_xorGate</sprite>
     <sprite>sprites\spr_notGate</sprite>
@@ -45,6 +46,7 @@
     </objects>
     <object>objects\obj_gateLocation</object>
     <object>objects\obj_puzzleGrid</object>
+    <object>objects\obj_reservoir</object>
     <object>objects\obj_wire</object>
     <object>objects\obj_wireButton</object>
     <object>objects\obj_controller</object>

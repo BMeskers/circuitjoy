@@ -60,9 +60,11 @@ currentGridY = 0;
 if (pickup){
     x = mouse_x - sprite_width / 2;
     y = mouse_y - sprite_height / 2;
+    depth = -1;
 }else {
     centerX = x + sprite_width / 2;
     centerY = y + sprite_height / 2;
+    depth = 0;
     
     otherInstance = 0;
     for (i = 0; i &lt; instance_number(obj_gateLocation); i += 1){
