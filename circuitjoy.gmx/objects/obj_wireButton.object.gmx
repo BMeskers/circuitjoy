@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>global.wireDrawing = false;
+window_set_cursor(cr_none);
 </string>
           </argument>
         </arguments>
@@ -78,11 +79,9 @@ if (global.wireDrawing){
             <kind>1</kind>
             <string>draw_self();
 if (global.wireDrawing){
-    cursor_sprite = spr_glove;
-    window_set_cursor(cr_none);
+    cursor_sprite = spr_wireGlove;
 }else{
-    window_set_cursor(cr_default);
-    cursor_sprite = -1;
+    cursor_sprite = spr_glove;
 }
 </string>
           </argument>

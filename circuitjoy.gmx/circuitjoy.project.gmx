@@ -27,6 +27,7 @@
     <sprite>sprites\spr_block</sprite>
     <sprite>sprites\spr_cursorCollision</sprite>
     <sprite>sprites\spr_checkButton</sprite>
+    <sprite>sprites\spr_wireGlove</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
