@@ -54,6 +54,7 @@
     <object>objects\obj_GateToolbar</object>
     <object>objects\obj_cursorCollision</object>
     <object>objects\obj_checkButton</object>
+    <object>objects\obj_answers</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>
