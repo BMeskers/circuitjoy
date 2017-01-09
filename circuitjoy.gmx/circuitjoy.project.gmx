@@ -19,8 +19,7 @@
     <sprite>sprites\spr_outputOff</sprite>
     <sprite>sprites\spr_inputOn</sprite>
     <sprite>sprites\spr_outputOn</sprite>
-    <sprite>sprites\spr_notDrawing</sprite>
-    <sprite>sprites\spr_drawing</sprite>
+    <sprite>sprites\spr_wireDrawing</sprite>
     <sprite>sprites\spr_objective</sprite>
     <sprite>sprites\spr_objectiveClear</sprite>
     <sprite>sprites\spr_glove</sprite>
@@ -28,6 +27,8 @@
     <sprite>sprites\spr_cursorCollision</sprite>
     <sprite>sprites\spr_checkButton</sprite>
     <sprite>sprites\spr_wireGlove</sprite>
+    <sprite>sprites\spr_helpButton</sprite>
+    <sprite>sprites\spr_wrongBorder</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -56,6 +57,8 @@
     <object>objects\obj_cursorCollision</object>
     <object>objects\obj_checkButton</object>
     <object>objects\obj_answers</object>
+    <object>objects\obj_helpButton</object>
+    <object>objects\obj_wrongBorder</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>

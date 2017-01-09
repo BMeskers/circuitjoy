@@ -29,6 +29,12 @@
 
 answers[0,0] = 1;
 answers[0,1] = 0;
+answers[0,2] = 1;
+answers[0,3] = 0;
+answers[0,4] = 1;
+answers[0,5] = 0;
+answers[0,6] = 1;
+answers[0,7] = 0;
 
 answers[1,0] = 0;
 answers[1,1] = 0;
