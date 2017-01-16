@@ -28,6 +28,7 @@
             <string>global.wirePickup = false;
 global.editColour = $f3f57f;
 global.maxWireInCell = 5;
+global.checking = false;
 
 global.level = 0;
 

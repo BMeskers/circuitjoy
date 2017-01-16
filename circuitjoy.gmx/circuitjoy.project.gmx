@@ -20,12 +20,14 @@
     <sprite>sprites\spr_inputOn</sprite>
     <sprite>sprites\spr_outputOn</sprite>
     <sprite>sprites\spr_wireDrawing</sprite>
+    <sprite>sprites\spr_wireDrawingPressed</sprite>
     <sprite>sprites\spr_objective</sprite>
     <sprite>sprites\spr_objectiveClear</sprite>
     <sprite>sprites\spr_glove</sprite>
     <sprite>sprites\spr_block</sprite>
-    <sprite>sprites\spr_cursorCollision</sprite>
     <sprite>sprites\spr_checkButton</sprite>
+    <sprite>sprites\spr_checkButtonPressed</sprite>
+    <sprite>sprites\spr_cursorCollision</sprite>
     <sprite>sprites\spr_wireGlove</sprite>
     <sprite>sprites\spr_helpButton</sprite>
     <sprite>sprites\spr_helpButtonPressed</sprite>

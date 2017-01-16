@@ -309,7 +309,7 @@ if (!wireplaced and gridWeight[fromID] != noone){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (initPath){
+            <string>if (initPath and !global.checking){
     if (global.wirePickup and !wireplaced){
         if (placeComponent != noone){
             

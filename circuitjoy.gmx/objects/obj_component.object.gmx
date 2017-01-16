@@ -89,7 +89,7 @@ if (input2Wire != 0){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (global.wireDrawing and global.wirePickup = false){
+            <string>if (global.wireDrawing and global.wirePickup = false and !global.checking){
     newWire = instance_create(x, y, obj_wire)
     
     //check on which side this component is pressed
