@@ -28,10 +28,12 @@
     <sprite>sprites\spr_checkButton</sprite>
     <sprite>sprites\spr_wireGlove</sprite>
     <sprite>sprites\spr_helpButton</sprite>
+    <sprite>sprites\spr_helpButtonPressed</sprite>
     <sprite>sprites\spr_wrongBorder</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
+    <background>background\background1</background>
   </backgrounds>
   <paths name="paths"/>
   <objects name="objects">

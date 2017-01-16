@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>event_inherited();
 gridX = 2;
-gridY = 7;
+gridY = 6;
 width = gridWidth * gridX;
 height = gridHeight * gridY;
 
