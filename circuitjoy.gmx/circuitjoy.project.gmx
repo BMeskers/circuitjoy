@@ -32,6 +32,7 @@
     <sprite>sprites\spr_helpButton</sprite>
     <sprite>sprites\spr_helpButtonPressed</sprite>
     <sprite>sprites\spr_wrongBorder</sprite>
+    <sprite>sprites\spr_helpText</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
@@ -63,6 +64,7 @@
     <object>objects\obj_answers</object>
     <object>objects\obj_helpButton</object>
     <object>objects\obj_wrongBorder</object>
+    <object>objects\obj_helpText</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>
