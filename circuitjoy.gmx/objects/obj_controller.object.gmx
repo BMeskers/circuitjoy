@@ -32,6 +32,10 @@ global.checking = false;
 
 global.level = 0;
 
+global.nrWrong = 0;
+global.points = 0;
+global.help = false;
+
 instance_create(0,0,obj_answers);
 
 instance_create(0,0,obj_cursorCollision);

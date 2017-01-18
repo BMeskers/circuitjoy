@@ -37,8 +37,13 @@
   <backgrounds name="background">
     <background>background\background0</background>
     <background>background\background1</background>
+    <background>background\background2</background>
   </backgrounds>
   <paths name="paths"/>
+  <fonts name="fonts">
+    <font>fonts\font1</font>
+    <font>fonts\font0</font>
+  </fonts>
   <objects name="objects">
     <objects name="components">
       <object>objects\obj_component</object>
@@ -65,6 +70,7 @@
     <object>objects\obj_helpButton</object>
     <object>objects\obj_wrongBorder</object>
     <object>objects\obj_helpText</object>
+    <object>objects\obj_finalScore</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\testRoom</room>

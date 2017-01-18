@@ -30,6 +30,7 @@ passed = false;
 n = 0;
 inputs = null;
 outputs = null;
+isWrong = false;
 </string>
           </argument>
         </arguments>
@@ -76,6 +77,7 @@ for (i = 0; i &lt; array_length_1d(outputs); i ++){
         //wrong answer
         alarmTime += 20;
         instance_create(0, 0, obj_wrongBorder);
+        isWrong = true;
     }
 }
 
@@ -96,6 +98,14 @@ if (inputID &lt; power(2, array_length_1d(inputs)) - 1){
     global.checking = false;
     for (i = 0; i &lt; array_length_1d(inputs); i++){
         inputs[i].output = false;
+    }
+    // if there was an error, add the error on number of times wrong
+    if(isWrong){
+        global.nrWrong += 1;
+    }
+    //if there was no error, strt the finalScore 
+    else{
+        instance_create(0, 0, obj_finalScore);
     }
 }
 </string>
