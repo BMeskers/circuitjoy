@@ -102,6 +102,7 @@ if (inputID &lt; power(2, array_length_1d(inputs)) - 1){
     // if there was an error, add the error on number of times wrong
     if(isWrong){
         global.nrWrong += 1;
+        isWrong = false;
     }
     //if there was no error, strt the finalScore 
     else{
