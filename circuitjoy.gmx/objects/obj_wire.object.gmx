@@ -461,6 +461,7 @@ if (checkID == destID){
         
         tID = ds_list_find_value(drawPath, 0);
         twx = gridWeight[tID];
+        tw = twx;
             tw = global.maxWireInCell / 2 - 1 - twx / 2;
             if (twx mod 2 == 1){
                 tw += twx;
@@ -477,6 +478,7 @@ if (checkID == destID){
             fy = ty
             tID = ds_list_find_value(drawPath, i);
             twx = gridWeight[tID];
+            tw = twx
             tw = global.maxWireInCell / 2 - 1 - twx / 2;
             if (twx mod 2 == 1){
                 tw += twx;

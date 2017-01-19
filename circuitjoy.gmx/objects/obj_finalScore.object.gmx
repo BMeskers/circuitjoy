@@ -30,18 +30,40 @@ finish = "#Click this window to continue";
 p = 0;
 
 if(global.help){
-    global.points -= 1;
+    global.points -= 20;
 }
 
 if(global.nrWrong &gt; 5){
-    p = 5*3;
+    p = 5*5;
 }
 else{
-    p = global.nrWrong*3;
+    p = global.nrWrong*5;
 }
 
 global.points -= p;
-global.points += 50;
+global.points += 100;
+
+minUsed = instance_find(obj_answers, 0).minGates[global.level];
+gates = instance_number(obj_gate)
+
+grid = instance_find(obj_puzzleGrid, 0)
+m = 0;
+for (i = 0; i &lt; grid.gridX; i++){
+    for (j = 0; j &lt; grid.gridY; j++){
+        if(!is_array(grid.grid[i,j])){
+            if (object_is_ancestor(grid.grid[i,j].object_index ,obj_gate)){
+                m++;
+            }
+        }
+    }
+}
+
+deltaUsed = m - minUsed
+deltaAvailable = gates - minUsed
+p = deltaUsed / deltaAvailable * 35;
+p = round(p)
+global.points -= p
+
 message = message + string(global.points);
 </string>
           </argument>
@@ -109,7 +131,8 @@ draw_rectangle(x1,y1,x1+rWidth, y1+rHeight,1);
 draw_set_colour(c_white);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
-draw_text_ext_colour(x1+20, y1+20, string(message), msgHeight, rWidth-20, c_red, c_red, c_maroon, c_maroon, 1);
+draw_set_colour($005500);
+draw_text_ext(x1+20, y1+20, string(message), msgHeight, rWidth-20);
 draw_set_font(font0);
 
 fheight = string_height(message);
@@ -117,7 +140,8 @@ f = string_height(finish);
 fheight += f;
 height = rHeight - y1;
 
-draw_text_ext_colour(x1+20, y1+height, string(finish), fheight, rWidth-20, c_red, c_red, c_maroon, c_maroon, 1);
+draw_set_colour($005500);
+draw_text_ext(x1+20, y1+height, string(finish), fheight, rWidth-20);
 </string>
           </argument>
         </arguments>

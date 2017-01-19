@@ -31,6 +31,7 @@ answers[0,0] = 0;
 answers[0,1] = 1;
 answers[0,2] = 1;
 answers[0,3] = 0;
+minGates[0] = 4
 
 answers[1,0] = 0;
 answers[1,1] = 0;

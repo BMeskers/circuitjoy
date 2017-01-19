@@ -41,6 +41,8 @@ instance_create(865, 48, obj_objective)
 
 instance_create(0,0,obj_answers);
 instance_create(0,0,obj_cursorCollision);
+
+window_set_fullscreen(true)
 </string>
           </argument>
         </arguments>

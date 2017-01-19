@@ -109,6 +109,7 @@
     <instance objName="obj_block" x="736" y="526" name="inst_F67BA907" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block" x="672" y="598" name="inst_F623E174" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_block" x="736" y="592" name="inst_CEF02547" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_xorGate" x="64" y="422" name="inst_9E4A6313" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="background1" x="736" y="132" w="64" h="64" xo="0" yo="64" id="10000004" name="inst_15792FAE" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
