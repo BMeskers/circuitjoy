@@ -52,11 +52,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event_inherited();
-if (global.wireDrawing == false){
-    output = !output;
+            <string>if (!global.checking){
+    event_inherited();
+    if (global.wireDrawing == false){
+        output = !output;
+    }
 }
-
 </string>
           </argument>
         </arguments>

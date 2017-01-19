@@ -51,21 +51,20 @@ popup = false;
             <kind>1</kind>
             <string>if (pressed) {
     sprite_index = spr_helpButtonPressed;
-    popup = true;
 }else{
     sprite_index = spr_helpButton;
-    popup = false;
+}
+
+
+
+if(pressed and !popup) {
+    //alarmTime += 20;
+    objective = instance_find(obj_objective, 0)
+    instance_create(objective.x, objective.y + sprite_get_height(spr_objective) / 2, obj_helpText);
+    popup = true;
 }
 
 pressed = false;
-
-if(popup) {
-    //alarmTime += 20;
-    sp = spr_helpText;
-    height = sprite_get_height(sp);
-    height += 20;
-    instance_create(x - 50, y - height, obj_helpText);
-}
 </string>
           </argument>
         </arguments>
@@ -88,8 +87,10 @@ if(popup) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>pressed = true;
-global.help = true;
+            <string>if (!global.checking){
+    pressed = true;
+    global.help = true;
+}
 </string>
           </argument>
         </arguments>

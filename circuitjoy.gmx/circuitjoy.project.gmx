@@ -33,6 +33,8 @@
     <sprite>sprites\spr_helpButtonPressed</sprite>
     <sprite>sprites\spr_wrongBorder</sprite>
     <sprite>sprites\spr_helpText</sprite>
+    <sprite>sprites\sprite27</sprite>
+    <sprite>sprites\sprite28</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
